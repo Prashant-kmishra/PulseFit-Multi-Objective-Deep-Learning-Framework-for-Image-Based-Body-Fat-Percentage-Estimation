@@ -12,7 +12,8 @@ class Settings(BaseSettings):
     SCALER_H_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "height_cm_scaler.pkl")
     SCALER_W_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "weight_scaler.pkl")
     CALIBRATOR_H_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "calibrator_height.pkl")
-    CALIBRATOR_W_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "calibrator_weight.pkl")
+    CALIBRATOR_W_LIGHT_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "calibrator_weight_ridge.pkl")
+    CALIBRATOR_W_HEAVY_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "calibrator_weight_iso.pkl")
 
 settings = Settings()
 

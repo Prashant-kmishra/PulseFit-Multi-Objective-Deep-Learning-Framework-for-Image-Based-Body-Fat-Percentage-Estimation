@@ -38,14 +38,15 @@ export default function RootLayout({
               <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
                 <Link href="/" className="hover:text-primary transition-colors">Overview</Link>
                 <Link href="/explainability" className="hover:text-primary transition-colors">Model Explainability</Link>
+                <Link href="/methodology" className="hover:text-primary transition-colors">Limitations</Link>
                 <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
               </nav>
 
-              <Link href="/predict">
+              <a href="/predict">
                 <button className="bg-primary hover:bg-deepblue text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
                   Predict Body Fat %
                 </button>
-              </Link>
+              </a>
             </div>
           </div>
         </header>

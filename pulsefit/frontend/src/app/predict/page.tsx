@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { GlassCard } from "@/components/ui/GlassCard";
 import Link from "next/link";
-import { ArrowLeft, Loader2, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Loader2, Image as ImageIcon, Info } from "lucide-react";
 
 export default function Predict() {
   const [file, setFile] = useState<File | null>(null);
@@ -136,37 +136,63 @@ export default function Predict() {
         ) : (
           <div className="flex flex-col gap-8">
             <GlassCard className="p-8">
-              <h2 className="text-2xl font-bold mb-6">Results Dashboard</h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold">Results Dashboard</h2>
+                <div className="flex items-center text-xs text-muted bg-white/30 px-3 py-1.5 rounded-full shadow-sm border border-white/40">
+                  <Info size={14} className="mr-1.5 text-primary" />
+                  AI estimates are based on 2D pixel density and cannot account for 3D depth.
+                </div>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col items-center justify-center p-6 bg-white/40 rounded-2xl border border-white/30">
-                  <div className="text-6xl font-black font-mono text-primary mb-2">
-                    {result.metrics.body_fat_pct}%
+                  <div className="text-lg font-bold text-deepblue mb-1">Estimated Body Fat</div>
+                  <div className="text-5xl font-black font-mono text-primary mb-1">
+                    {Number(result.metrics.body_fat_pct).toFixed(2)}%
                   </div>
-                  <div className="text-lg font-bold text-deepblue">Body Fat</div>
-                  <div className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary">
+                  <div className="text-sm font-medium text-muted mb-2">
+                    (± 4% Margin of Error)
+                  </div>
+                  <div className="text-sm font-mono bg-white/50 px-3 py-1 rounded-lg border border-white/60 text-dark/70">
+                    {Math.max(1, result.metrics.body_fat_pct - 4).toFixed(2)}% - {(result.metrics.body_fat_pct + 4).toFixed(2)}%
+                  </div>
+                  <div className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary">
                     {result.metrics.body_fat_category}
                   </div>
                 </div>
 
                 <div className="flex flex-col items-center justify-center p-6 bg-white/40 rounded-2xl border border-white/30">
-                  <div className="text-6xl font-black font-mono text-seagreen mb-2">
-                    {result.metrics.bmi}
+                  <div className="text-lg font-bold text-deepblue mb-1">Estimated BMI</div>
+                  <div className="text-5xl font-black font-mono text-seagreen mb-1">
+                    {Number(result.metrics.bmi).toFixed(2)}
                   </div>
-                  <div className="text-lg font-bold text-deepblue">BMI</div>
-                  <div className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-seagreen/10 text-seagreen">
+                  <div className="text-sm font-medium text-muted mb-2">
+                    (± 5 Margin of Error)
+                  </div>
+                  <div className="text-sm font-mono bg-white/50 px-3 py-1 rounded-lg border border-white/60 text-dark/70">
+                    {Math.max(10, result.metrics.bmi - 5).toFixed(2)} - {(result.metrics.bmi + 5).toFixed(2)}
+                  </div>
+                  <div className="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold bg-seagreen/10 text-seagreen">
                     {result.metrics.bmi_category}
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
-                <div className="p-4 bg-white/40 rounded-xl text-center">
-                  <div className="text-sm text-muted">Height</div>
-                  <div className="font-mono text-xl font-bold">{result.metrics.height_cm} cm</div>
+                <div className="p-4 bg-white/40 rounded-xl text-center flex flex-col items-center">
+                  <div className="text-sm text-muted font-bold mb-1">Estimated Height</div>
+                  <div className="font-mono text-2xl font-black text-deepblue mb-1">{Number(result.metrics.height_cm).toFixed(2)} cm</div>
+                  <div className="text-xs text-muted mb-1">(± 7 cm Margin of Error)</div>
+                  <div className="text-xs font-mono bg-white/50 px-2 py-1 rounded text-dark/70">
+                    {(result.metrics.height_cm - 7).toFixed(2)} - {(result.metrics.height_cm + 7).toFixed(2)} cm
+                  </div>
                 </div>
-                <div className="p-4 bg-white/40 rounded-xl text-center">
-                  <div className="text-sm text-muted">Weight</div>
-                  <div className="font-mono text-xl font-bold">{result.metrics.weight_kg} kg</div>
+                <div className="p-4 bg-white/40 rounded-xl text-center flex flex-col items-center">
+                  <div className="text-sm text-muted font-bold mb-1">Estimated Weight</div>
+                  <div className="font-mono text-2xl font-black text-deepblue mb-1">{Number(result.metrics.weight_kg).toFixed(2)} kg</div>
+                  <div className="text-xs text-muted mb-1">(± 12 kg Margin of Error)</div>
+                  <div className="text-xs font-mono bg-white/50 px-2 py-1 rounded text-dark/70">
+                    {(result.metrics.weight_kg - 12).toFixed(2)} - {(result.metrics.weight_kg + 12).toFixed(2)} kg
+                  </div>
                 </div>
               </div>
             </GlassCard>
@@ -175,9 +201,9 @@ export default function Predict() {
               <GlassCard className="p-8">
                 <h3 className="text-xl font-bold mb-4">Scanned Photo</h3>
                 <img 
-                  src={`data:image/jpeg;base64,${result.silhouette_base64}`} 
+                  src={preview || ""} 
                   alt="Scanned Photo" 
-                  className="w-full rounded-lg shadow-sm bg-black/5 object-contain max-h-[500px]"
+                  className="w-full rounded-lg shadow-sm object-contain max-h-[500px]"
                 />
               </GlassCard>
 
@@ -213,7 +239,7 @@ export default function Predict() {
               </Link>
               <button 
                 onClick={() => setResult(null)} 
-                className="ml-4 bg-muted/10 text-muted hover:bg-muted/20 px-6 py-3 rounded-full font-bold transition-all cursor-pointer"
+                className="ml-4 bg-primary hover:bg-deepblue text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
               >
                 New Prediction
               </button>

@@ -12,7 +12,7 @@ export default function Home() {
         <h1 className="text-5xl md:text-7xl font-bold text-dark tracking-tight mb-6">
           Point a camera at yourself. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-seagreen">
-            Get lab-grade body composition in 8 seconds.
+            Get AI-estimated body composition in 8 seconds.
           </span>
         </h1>
         <p className="text-xl text-muted max-w-2xl mb-12">
@@ -71,15 +71,15 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-deepblue mb-8">Why It's Accurate</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">±[X.XX] cm</div>
+              <div className="text-4xl font-bold text-primary mb-2">±6.88 cm</div>
               <div className="text-muted">Height MAE</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-seagreen mb-2">±[X.XX] kg</div>
+              <div className="text-4xl font-bold text-seagreen mb-2">±12.47 kg</div>
               <div className="text-muted">Weight MAE</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">±[X.XX]</div>
+              <div className="text-4xl font-bold text-primary mb-2">±3.52</div>
               <div className="text-muted">BMI MAE</div>
             </div>
           </div>

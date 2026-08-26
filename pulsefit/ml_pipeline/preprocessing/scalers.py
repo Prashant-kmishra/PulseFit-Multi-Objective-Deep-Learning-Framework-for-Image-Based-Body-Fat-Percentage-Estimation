@@ -1,5 +1,31 @@
 import os
 import joblib
+import numpy as np
+
+class BlendedCalibrator:
+    def __init__(self, model_light, model_heavy, lower_bound=65.0, upper_bound=85.0):
+        self.model_light = model_light
+        self.model_heavy = model_heavy
+        self.lower_bound = lower_bound
+        self.upper_bound = upper_bound
+
+    def predict(self, X):
+        X_arr = np.array(X).flatten()
+        preds = np.zeros_like(X_arr)
+        
+        pred_light = self.model_light.predict(X).flatten()
+        pred_heavy = self.model_heavy.predict(X).flatten()
+        
+        for i, x in enumerate(X_arr):
+            if x <= self.lower_bound:
+                preds[i] = pred_light[i]
+            elif x >= self.upper_bound:
+                preds[i] = pred_heavy[i]
+            else:
+                weight_heavy = (x - self.lower_bound) / (self.upper_bound - self.lower_bound)
+                preds[i] = (1 - weight_heavy) * pred_light[i] + weight_heavy * pred_heavy[i]
+                
+        return preds
 
 class BiometricScalers:
     def __init__(self, config_settings):
@@ -11,7 +37,9 @@ class BiometricScalers:
                 self.scaler_h = joblib.load(config_settings.SCALER_H_PATH)
                 self.scaler_w = joblib.load(config_settings.SCALER_W_PATH)
                 self.calibrator_h = joblib.load(config_settings.CALIBRATOR_H_PATH)
-                self.calibrator_w = joblib.load(config_settings.CALIBRATOR_W_PATH)
+                
+                # Rollback to Baseline Ridge Calibrator for overall MAE
+                self.calibrator_w = joblib.load(config_settings.CALIBRATOR_W_LIGHT_PATH)
 
     def inverse_transform_and_calibrate(self, scaled_h: float, scaled_w: float):
         if self.demo_mode:
