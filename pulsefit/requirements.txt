@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+pydantic-settings
+torch
+torchvision
+numpy
+pillow
+scikit-learn
+opencv-python-headless
+joblib
