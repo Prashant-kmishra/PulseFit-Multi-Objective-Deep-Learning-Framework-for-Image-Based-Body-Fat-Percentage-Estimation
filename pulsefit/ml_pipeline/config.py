@@ -6,13 +6,13 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class Settings(BaseSettings):
-    DEMO_MODE: bool = os.getenv("DEMO_MODE", "true").lower() in ("true", "1", "yes")
-    MODEL_WEIGHTS_DIR: str = os.getenv("MODEL_WEIGHTS_DIR", "weights")
-    GOLDEN_MODEL_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "pulsefit_golden_model.pth")
-    SCALER_H_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "height_cm_scaler.pkl")
-    SCALER_W_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "weight_scaler.pkl")
-    CALIBRATOR_H_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "calibrator_height.pkl")
-    CALIBRATOR_W_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "calibrator_weight.pkl")
+    DEMO_MODE: bool = os.getenv("DEMO_MODE", "false").lower() in ("true", "1", "yes")
+    MODEL_WEIGHTS_DIR: str = r"C:\Users\mishr\PROJECTS\P4-Pulse-Fit\models"
+    GOLDEN_MODEL_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "checkpoints", "pulsefit_golden_model.pth")
+    SCALER_H_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "height_cm_scaler.pkl")
+    SCALER_W_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "weight_scaler.pkl")
+    CALIBRATOR_H_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "calibrator_height.pkl")
+    CALIBRATOR_W_PATH: str = os.path.join(MODEL_WEIGHTS_DIR, "preprocessing", "calibrator_weight.pkl")
 
 settings = Settings()
 
