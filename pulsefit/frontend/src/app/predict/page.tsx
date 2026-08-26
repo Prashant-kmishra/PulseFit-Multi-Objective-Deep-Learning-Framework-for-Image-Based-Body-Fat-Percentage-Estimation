@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { GlassCard } from "@/components/ui/GlassCard";
 import Link from "next/link";
-import { ArrowLeft, Loader2, Image as ImageIcon, Info } from "lucide-react";
+import { Loader2, Image as ImageIcon, Info } from "lucide-react";
 
 export default function Predict() {
   const [file, setFile] = useState<File | null>(null);
@@ -13,6 +13,7 @@ export default function Predict() {
   const [gender, setGender] = useState<string>("Male");
   
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,6 +57,7 @@ export default function Predict() {
       }
       const data = await res.json();
       setResult(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message);
     } finally {

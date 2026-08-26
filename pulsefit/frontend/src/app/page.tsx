@@ -68,7 +68,7 @@ export default function Home() {
       {/* Validation */}
       <section className="w-full max-w-5xl mx-auto px-6 py-20 relative z-10">
         <GlassCard className="p-12 text-center">
-          <h2 className="text-3xl font-bold text-deepblue mb-8">Why It's Accurate</h2>
+          <h2 className="text-3xl font-bold text-deepblue mb-8">Why It&apos;s Accurate</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="text-4xl font-bold text-primary mb-2">±6.88 cm</div>

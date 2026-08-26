@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { ArrowLeft, TrendingDown, Scale, CheckCircle } from "lucide-react";
 
 export default function Explainability() {
   return (

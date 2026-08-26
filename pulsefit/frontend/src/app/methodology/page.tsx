@@ -25,9 +25,9 @@ export default function Methodology() {
 
           {/* Card 2 */}
           <GlassCard className="p-8">
-            <h2 className="text-2xl font-bold text-deepblue mb-4">2. The "Squash" Effect</h2>
+            <h2 className="text-2xl font-bold text-deepblue mb-4">2. The &quot;Squash&quot; Effect</h2>
             <div className="space-y-3 text-muted">
-              <p><strong>The Challenge:</strong> Standard deep learning pipelines force images into square dimensions (e.g., 224x224 tensors). Naive resizing distorts human proportions, vertically "squashing" portraits and making users appear artificially wider.</p>
+              <p><strong>The Challenge:</strong> Standard deep learning pipelines force images into square dimensions (e.g., 224x224 tensors). Naive resizing distorts human proportions, vertically &quot;squashing&quot; portraits and making users appear artificially wider.</p>
               <p><strong>The Mitigation:</strong> We engineered a custom <code>SquarePad</code> transformation pipeline. This dynamically pads the original image with negative space before resizing, preserving the user&#39;s exact physical aspect ratio during tensor scaling.</p>
             </div>
           </GlassCard>
@@ -36,7 +36,7 @@ export default function Methodology() {
           <GlassCard className="p-8">
             <h2 className="text-2xl font-bold text-deepblue mb-4">3. Variance Compression & Data Quality</h2>
             <div className="space-y-3 text-muted">
-              <p><strong>The Challenge:</strong> Open-source biometric datasets suffer from self-reporting noise. Furthermore, regression algorithms mathematically penalize extreme outliers to minimize overall dataset loss, creating a "ceiling effect" that systematically under-reports heavyweight individuals.</p>
+              <p><strong>The Challenge:</strong> Open-source biometric datasets suffer from self-reporting noise. Furthermore, regression algorithms mathematically penalize extreme outliers to minimize overall dataset loss, creating a &quot;ceiling effect&quot; that systematically under-reports heavyweight individuals.</p>
               <p><strong>The Mitigation:</strong> After A/B testing aggressive Isotonic calibrators (which degraded global accuracy by 34%), we made the executive decision to deploy a <strong>Ridge Calibrator</strong>. This protects the 80% majority while transparently acknowledging the margin of error for edge cases.</p>
             </div>
           </GlassCard>

@@ -223,7 +223,7 @@ export default function Contact() {
               <Mail size={24} />
             </div>
             
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">Let's connect</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Let&apos;s connect</h2>
             <p className="text-slate-500 text-sm mb-8 leading-relaxed">
               Feel free to reach out for roles in data science, analytics, or quantitative finance.
             </p>

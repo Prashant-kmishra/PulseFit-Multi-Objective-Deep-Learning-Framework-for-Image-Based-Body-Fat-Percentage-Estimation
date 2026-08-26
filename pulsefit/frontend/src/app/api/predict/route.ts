@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       const data = await backendRes.json();
       return NextResponse.json(data);
     }
-  } catch (error) {
+  } catch {
     // Backend is not running or unreachable, fallback to Mock Data
     console.log("Python backend not found. Falling back to Mock API.");
   }
